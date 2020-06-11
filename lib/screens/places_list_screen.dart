@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../providers/great_places.dart';
 
+import '../screens/place_detail_screen.dart';
+
 import './add_place_screen.dart';
 
 class PlacesListScreen extends StatelessWidget {
@@ -21,23 +23,34 @@ class PlacesListScreen extends StatelessWidget {
         ],
       ),
       body: FutureBuilder(
-          future: Provider.of<GreatPlaces>(context, listen: false).fetchAndSetPlaces(),
-          builder: (ctx, snapshot) => snapshot.connectionState == ConnectionState.waiting ? Center(child: CircularProgressIndicator(),)  :  Consumer<GreatPlaces>(
-            builder: (context, greatPlacesData, ch) =>
-                greatPlacesData.items.length <= 0 ? ch : ListView.builder(
-                  itemCount: greatPlacesData.items.length,
-                  itemBuilder: (ctx, index) => ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: FileImage(greatPlacesData.items[index].image),
-                    ),
-                    title: Text(greatPlacesData.items[index].title),
-                    onTap: (){},
-                  )
+        future: Provider.of<GreatPlaces>(context, listen: false)
+            .fetchAndSetPlaces(),
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Consumer<GreatPlaces>(
+                builder: (context, greatPlacesData, ch) =>
+                    greatPlacesData.items.length <= 0
+                        ? ch
+                        : ListView.builder(
+                            itemCount: greatPlacesData.items.length,
+                            itemBuilder: (ctx, index) => ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage: FileImage(
+                                        greatPlacesData.items[index].image),
+                                  ),
+                                  title:Text(greatPlacesData.items[index].title),
+                                  subtitle: Text(greatPlacesData.items[index].location.address),
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(PlaceDetailScreen.routeName, arguments: greatPlacesData.items[index].id);
+                                  },
+                                )),
+                child: Center(
+                  child: const Text('Got not Places yet, start adding some!'),
                 ),
-            child: Center(
-              child: const Text('Got not Places yet, start adding some!'),
-            ),
-        ),
+              ),
       ),
     );
   }
