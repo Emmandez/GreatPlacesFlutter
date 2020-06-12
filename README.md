@@ -1,16 +1,13 @@
-# great_places
+# Great places
 
-A new Flutter project.
+Great Places app from the [Flutter & Dart - The Complete Guide](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)  course on Udemy.
 
-## Getting Started
+## About
 
-This project is a starting point for a Flutter application.
+The aim of this project is to learn how to work with device features such as local storage, camera and location.
 
-A few resources to get you started if this is your first Flutter project:
+The user can add a new place which is stored in the phone memory using SQLite.
+When creating a new place, the user can take a picture directly from the app.
+They also can choose between using their current location or selecting a location on the map.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Google services are used for the map feature.
